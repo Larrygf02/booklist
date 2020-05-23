@@ -4,7 +4,7 @@ import { resolvers } from './resolvers'
 const tyDefs = `
     type Query {
         books: [Book]
-        book(id: String!): String
+        book(id: String!): Book
     }
     type Book{
         id: ID

@@ -8,8 +8,8 @@ var books = [
 
 export const resolvers = {
     Query: {
-        book({ id }) {
-            _book = books.filter(b => b.id == id)[0]
+        book(_, { id }) {
+            let _book = books.filter(b => b.id == id)[0]
             return _book
         },
         books: () => {
