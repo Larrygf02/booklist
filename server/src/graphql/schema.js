@@ -1,15 +1,18 @@
 import {makeExecutableSchema} from 'graphql-tools'
+import { resolvers } from './resolvers'
+
 const tyDefs = `
     type Query {
         books: [Book]
-        book(id: String!): Book
+        book(id: String!): String
     }
     type Book{
-        _id: ID
+        id: ID
         name: String!
-        genre: String!
+        genre: String
     }
 `
 export default makeExecutableSchema({
-    typeDefs: tyDefs
+    typeDefs: tyDefs,
+    resolvers
 })
