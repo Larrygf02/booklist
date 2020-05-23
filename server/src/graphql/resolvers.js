@@ -9,7 +9,8 @@ var books = [
 export const resolvers = {
     Query: {
         book({ id }) {
-            return `Id ${id}`
+            _book = books.filter(b => b.id == id)[0]
+            return _book
         },
         books: () => {
             // All books
