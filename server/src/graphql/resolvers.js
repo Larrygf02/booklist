@@ -31,7 +31,10 @@ export const resolvers = {
         }
     },
     Book: {
-        author: post => authors.filter(a => a.id == post.authorid)[0]
+        author: book => authors.filter(a => a.id == book.authorid)[0]
+    },
+    Author: {
+        books: author => books.filter(b => b.authorid == author.id)
     }
 }
 

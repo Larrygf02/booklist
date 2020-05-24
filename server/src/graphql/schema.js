@@ -18,6 +18,7 @@ const tyDefs = `
         id: ID
         name: String!
         age: Int
+        books: [Book]
     }
 `
 export default makeExecutableSchema({
