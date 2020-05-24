@@ -12,6 +12,7 @@ const tyDefs = `
         id: ID
         name: String!
         genre: String
+        author: Author
     }
     type Author  {
         id: ID

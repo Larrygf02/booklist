@@ -1,9 +1,9 @@
 ///dumy data
 var books = [
-    { name: 'Learn AWS sync ', id: '1'},
-    { name: 'Learn golang web', id: '2'},
-    { name: 'Learn graphql', id: '3'},
-    { name: 'Learn socket.io', id: '4'}
+    { name: 'Learn AWS sync ', id: '1', authorid: '1'},
+    { name: 'Learn golang web', id: '2', authorid: '2'},
+    { name: 'Learn graphql', id: '3', authorid: '1'},
+    { name: 'Learn socket.io', id: '4', authorid: '3'}
 ]
 
 var authors = [
@@ -29,6 +29,9 @@ export const resolvers = {
         authors: () => {
             return authors;
         }
+    },
+    Book: {
+        author: post => authors.filter(a => a.id == post.authorid)[0]
     }
 }
 
