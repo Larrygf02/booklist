@@ -6,6 +6,12 @@ var books = [
     { name: 'Learn socket.io', id: '4'}
 ]
 
+var authors = [
+    { name: 'Raul', age: 23, id: '1'},
+    { name: 'Grace', age: 23, id: '2'},
+    { name: 'Grecia', age: 23, id: '3'},
+]
+
 export const resolvers = {
     Query: {
         book(_, { id }) {
@@ -15,6 +21,13 @@ export const resolvers = {
         books: () => {
             // All books
             return books;
+        },
+        author(_, { id }) {
+            let _author = authors.filter(a => a.id == id)[0]
+            return _author
+        },
+        authors: () => {
+            return authors;
         }
     }
 }
