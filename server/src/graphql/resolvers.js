@@ -1,16 +1,3 @@
-///dumy data
-var books = [
-    { name: 'Learn AWS sync ', id: '1', authorid: '1'},
-    { name: 'Learn golang web', id: '2', authorid: '2'},
-    { name: 'Learn graphql', id: '3', authorid: '1'},
-    { name: 'Learn socket.io', id: '4', authorid: '3'}
-]
-
-var authors = [
-    { name: 'Raul', age: 23, id: '1'},
-    { name: 'Grace', age: 23, id: '2'},
-    { name: 'Grecia', age: 23, id: '3'},
-]
 import book from '../models/book'
 import author from '../models/author'
 
