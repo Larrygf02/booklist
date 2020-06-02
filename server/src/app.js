@@ -1,8 +1,18 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './graphql/schema';
+import mongoose from 'mongoose';
 
 const app = express();
+
+mongoose.connect('mongodb://localhost/booklist', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+
+mongoose.connection.once('open', () => {
+    console.log('Connected to database');
+})
 app.use('/graphql', graphqlHTTP({
     graphiql: true,
     schema: schema
