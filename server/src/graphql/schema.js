@@ -22,10 +22,16 @@ const tyDefs = `
     }
     type Mutation {
         createAuthor(input: AuthorInput): Author
+        createBook(input: BookInput): Book
     }
     input AuthorInput {
         name: String!
         age: Int
+    }
+    input BookInput {
+        name: String!
+        genre: String
+        authorId: ID
     }
 `
 export default makeExecutableSchema({

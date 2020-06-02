@@ -34,10 +34,14 @@ export const resolvers = {
     },
     Mutation: {
         async createAuthor( _, {input}) {
-            console.log(input);
             const newAuthor = new author(input)
             await newAuthor.save()
             return newAuthor;
+        },
+        async createBook( _, { input }) {
+            const newBook = new book(input)
+            await newBook.save()
+            return newBook;   
         }
     },
     Book: {
