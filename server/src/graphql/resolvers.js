@@ -17,19 +17,16 @@ import author from '../models/author'
 export const resolvers = {
     Query: {
         book(_, { id }) {
-            let _book = books.filter(b => b.id == id)[0]
-            return _book
+            return book.findById(id)
         },
         books: () => {
-            // All books
-            return books;
+            return book.find({})
         },
         author(_, { id }) {
-            let _author = authors.filter(a => a.id == id)[0]
-            return _author
+            return author.findById(id)
         },
         authors: () => {
-            return authors;
+            return author.find({})
         }
     },
     Mutation: {
@@ -45,10 +42,10 @@ export const resolvers = {
         }
     },
     Book: {
-        author: book => authors.filter(a => a.id == book.authorid)[0]
+        author: book => author.findById(book.authorId)
     },
     Author: {
-        books: author => books.filter(b => b.authorid == author.id)
+        books: author => book.find({ authorId: author.id })
     }
 }
 
