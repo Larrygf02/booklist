@@ -11,6 +11,8 @@ var authors = [
     { name: 'Grace', age: 23, id: '2'},
     { name: 'Grecia', age: 23, id: '3'},
 ]
+import book from '../models/book'
+import author from '../models/author'
 
 export const resolvers = {
     Query: {
@@ -28,6 +30,14 @@ export const resolvers = {
         },
         authors: () => {
             return authors;
+        }
+    },
+    Mutation: {
+        async createAuthor( _, {input}) {
+            console.log(input);
+            const newAuthor = new author(input)
+            await newAuthor.save()
+            return newAuthor;
         }
     },
     Book: {
