@@ -24,12 +24,15 @@ export const resolvers = {
         },
         async createBook( _, { input }) {
             const { authorId } = input;
-            const authorFind = await author.find({_id: authorId})
-            if (Array.isArray(authorFind)) {
-                const newBook = new book(input)
-                newBook.save()
-                return newBook
+            try {
+                await author.exists({_id: authorId})
+            } catch (error) {
+                throw new Error(`AuthorId ${authorId} not exists`)
             }
+            const newBook = new book(input)
+            newBook.save()
+            return newBook
+
         }
     },
     Book: {
