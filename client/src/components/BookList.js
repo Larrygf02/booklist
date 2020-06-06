@@ -14,11 +14,14 @@ function BookList() {
     const { loading, error, data } = useQuery(getBooksQuery) 
     if (loading) return <p>Loading..</p>
     if (error) return <p>Error..</p>
-    console.log(data)
+    const { books } = data;
+    console.log(books)
     return (
         <div>
             <ul id="book-list">
-                <li>Book Name</li>
+                {books.map(book => (
+                    <li key={book.id}>{ book.name }</li>
+                ))}
             </ul>
         </div>
     )
