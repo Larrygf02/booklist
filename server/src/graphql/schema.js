@@ -31,7 +31,7 @@ const tyDefs = `
     input BookInput {
         name: String!
         genre: String
-        authorId: ID
+        authorId: ID!
     }
 `
 export default makeExecutableSchema({
