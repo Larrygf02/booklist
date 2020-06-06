@@ -31,7 +31,7 @@ function AddBook() {
                 <select>
                     <option>Select Author</option>
                     {authors.map(author => (
-                        <option key={author.id}>{author.name}</option>
+                        <option key={author.id} value={author.id}>{author.name}</option>
                     ))}
                 </select>
             </div>
