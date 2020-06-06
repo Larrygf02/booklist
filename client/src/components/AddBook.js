@@ -1,35 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
-
-const getAuthorsQuery = gql`
-    {
-        authors {
-            id
-            name
-        }
-    }
-`
-
+import { getAuthorsQuery } from '../graphql/query'
 function AddBook() {
-    const { loading, error, data } = useQuery(getAuthorsQuery) 
+    const [name, setName] = useState('')
+    const [genre, setGenre] = useState('')
+    const [author, setAuthor] = useState('')
+    const { loading, error, data } = useQuery(getAuthorsQuery)
+    const saveBook = (e) => {
+        e.preventDefault();
+        console.log({
+            name,
+            genre,
+            author
+        })
+    }
     if (loading) return <p>Loading..</p>
     if (error) return <p>Error..</p>
     const { authors } = data;
     return (
-        <form id="add-book">
+        <form id="add-book" onSubmit={saveBook}>
             <div className="field">
                 <label>Book Name</label>
-                <input type="text"></input>
+                <input type="text" value={name} onChange={e => setName(e.target.value)}></input>
             </div>
             <div className="field">
                 <label>Genre</label>
-                <input type="text"></input>
+                <input type="text" value={genre} onChange={e => setGenre(e.target.value)}></input>
             </div>
             <div className="field">
                 <label>Author</label>
-                <select>
-                    <option>Select Author</option>
+                <select value={author} onChange={e => setAuthor(e.target.value)}>
+                    <option value={''}>Select Author</option>
                     {authors.map(author => (
                         <option key={author.id} value={author.id}>{author.name}</option>
                     ))}
