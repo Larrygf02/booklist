@@ -15,7 +15,6 @@ function BookList() {
     if (loading) return <p>Loading..</p>
     if (error) return <p>Error..</p>
     const { books } = data;
-    console.log(books)
     return (
         <div>
             <ul id="book-list">
