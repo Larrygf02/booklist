@@ -23,9 +23,13 @@ export const resolvers = {
             return newAuthor;
         },
         async createBook( _, { input }) {
-            const newBook = new book(input)
-            await newBook.save()
-            return newBook;   
+            const { authorId } = input;
+            const authorFind = await author.find({_id: authorId})
+            if (Array.isArray(authorFind)) {
+                const newBook = new book(input)
+                newBook.save()
+                return newBook
+            }
         }
     },
     Book: {
