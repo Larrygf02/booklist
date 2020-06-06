@@ -2,8 +2,11 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './graphql/schema';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 const app = express();
+//allow cross-origin requests
+app.use(cors())
 
 mongoose.connect('mongodb://localhost/booklist', {
     useNewUrlParser: true,
