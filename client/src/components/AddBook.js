@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { getAuthorsQuery } from '../graphql/query'
+import { addBookMutation } from '../graphql/mutation';
+
 function AddBook() {
     const [name, setName] = useState('')
     const [genre, setGenre] = useState('')
     const [author, setAuthor] = useState('')
+    const [addBook] = useMutation(addBookMutation)
     const { loading, error, data } = useQuery(getAuthorsQuery)
     const saveBook = (e) => {
         e.preventDefault();
-        console.log({
-            name,
-            genre,
-            author
-        })
+        addBook({ variables: {name, genre, authorId: author}})
+        setName('')
+        setGenre('')
+        setAuthor('')
     }
     if (loading) return <p>Loading..</p>
     if (error) return <p>Error..</p>
