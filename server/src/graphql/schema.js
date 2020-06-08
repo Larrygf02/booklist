@@ -23,6 +23,7 @@ const tyDefs = `
     type Mutation {
         createAuthor(input: AuthorInput): Author
         createBook(input: BookInput): Book
+        deleteBook(id: ID!): Boolean
     }
     input AuthorInput {
         name: String!

@@ -32,7 +32,15 @@ export const resolvers = {
             const newBook = new book(input)
             newBook.save()
             return newBook
-
+        },
+        async deleteBook( _, { id }) {
+            try {
+                await book.exists({_id: id})
+            } catch (error) {
+                throw new Error(`BookId ${id} not exist`)
+            }
+            await book.deleteOne({_id: id})
+            return true
         }
     },
     Book: {
