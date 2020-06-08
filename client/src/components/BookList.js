@@ -1,10 +1,15 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { getBooksQuery } from '../graphql/query'
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { getBooksQuery } from '../graphql/query';
+import { deleteBookMutation } from '../graphql/mutation';
+
 
 function BookList() {
+    const [removeBook] = useMutation(deleteBookMutation)
     const deleteBook = (id) => {
         console.log('Deleted Id', id)
+        removeBook({ variables: {id} })
+        window.location.reload()
     }
     const { loading, error, data } = useQuery(getBooksQuery) 
     if (loading) return <p>Loading..</p>

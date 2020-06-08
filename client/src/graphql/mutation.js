@@ -8,6 +8,13 @@ const addBookMutation = gql`
     }
 `
 
+const deleteBookMutation = gql`
+    mutation DeleteBook($id: ID!){
+        deleteBook(id: $id)
+    }
+`
+
 export {
-    addBookMutation
+    addBookMutation,
+    deleteBookMutation
 }
