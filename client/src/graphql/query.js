@@ -13,6 +13,9 @@ const getBooksQuery = gql`
         books {
             id
             name
+            author {
+                name
+            }
         }
     }
 `
