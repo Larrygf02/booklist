@@ -41,6 +41,14 @@ export const resolvers = {
             }
             await book.deleteOne({_id: id})
             return true
+        },
+        async deleteAuthor( _, { id }) {
+            try {
+                await author.exists({_id: id})
+            } catch (error) {
+                throw new Error(`AuthorId ${authorId} not exists`)
+            }
+            await author.deleteOne({_id: id})
         }
     },
     Book: {

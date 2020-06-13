@@ -24,6 +24,7 @@ const tyDefs = `
         createAuthor(input: AuthorInput): Author
         createBook(input: BookInput): Book
         deleteBook(id: ID!): Boolean
+        deleteAuthor(id: ID!): Author
     }
     input AuthorInput {
         name: String!
