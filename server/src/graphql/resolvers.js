@@ -1,5 +1,6 @@
 import book from '../models/book'
 import author from '../models/author'
+import user from '../models/user'
 
 export const resolvers = {
     Query: {
@@ -49,6 +50,12 @@ export const resolvers = {
                 throw new Error(`AuthorId ${authorId} not exists`)
             }
             await author.deleteOne({_id: id})
+        },
+        async createUser( _, { input }) {
+            input.count = 0;
+            const newUser = new user(input)
+            await newUser.save()
+            return newUser;
         }
     },
     Book: {
