@@ -19,10 +19,12 @@ mongoose.connection.once('open', () => {
 })
 
 app.use(cookieParser())
-app.use((req, res, next) => {
-    const accessToken = req.cookies['accessToken']
-    const data = verify(accessToken, 'SECRET')
-    req.userId = data.userId
+app.use((req, _, next) => {
+    try {        
+        const accessToken = req.cookies['access-token']
+        const data = verify(accessToken, 'SECRET')
+        req.userId = data.userId
+    } catch {}
     next()
 })
 app.use('/graphql', graphqlHTTP({

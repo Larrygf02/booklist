@@ -14,7 +14,10 @@ export const resolvers = {
         author(_, { id }) {
             return author.findById(id)
         },
-        authors: () => {
+        authors: (_, { id }, context) => {
+            if (!context.userId) {
+                return null
+            }
             return author.find({})
         }
     },
@@ -60,14 +63,15 @@ export const resolvers = {
         },
         async loginUser( _ , { input }, { res }) {
             const { username, password } = input
-            const user = User.findOne({ username, password });
+            const user = await User.findOne({username, password});
             if (!user) {
                 console.log('User not exists')
                 return null
             }
-            const refreshtoken = sign({ userID: user.id, count: user.count }, 'SECRET',
+            console.log("userid", user.id)
+            const refreshtoken = sign({ userId: user.id, count: user.count }, 'SECRET',
             { expiresIn: '7d'});
-            const accesstoken = sign({ userId: user.id }, 'SECRET', 
+            const accesstoken = sign({ userId: user.id}, 'SECRET', 
             { expiresIn: '15min'});
             res.cookie('refresh-token', refreshtoken)
             res.cookie('access-token', accesstoken)
