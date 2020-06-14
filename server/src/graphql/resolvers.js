@@ -1,7 +1,7 @@
 import book from '../models/book'
 import author from '../models/author'
-import user from '../models/user'
-
+import User from '../models/user'
+import { sign } from 'jsonwebtoken'
 export const resolvers = {
     Query: {
         book(_, { id }) {
@@ -57,9 +57,20 @@ export const resolvers = {
             await newUser.save()
             return newUser;
         },
-        async loginUser( _ , { input }) {
+        async loginUser( _ , { input }, { res }) {
             const { username, password } = input
-            return user.findOne({ username, password })
+            const user = User.findOne({ username, password });
+            if (!user) {
+                console.log('User not exists')
+                return null
+            }
+            const refreshtoken = sign({ userID: user.id, count: user.count }, 'SECRET',
+            { expiresIn: '7d'});
+            const accesstoken = sign({ userId: user.id }, 'SECRET', 
+            { expiresIn: '15min'});
+            res.cookie('refresh-token', refreshtoken, { expiresIn: 60*60*24*7 })
+            res.cookie('access-token', refreshtoken, { expiresIn: 60*15 })
+            return user;
         }
     },
     Book: {
