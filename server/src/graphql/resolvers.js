@@ -2,6 +2,7 @@ import book from '../models/book'
 import author from '../models/author'
 import User from '../models/user'
 import { sign } from 'jsonwebtoken'
+
 export const resolvers = {
     Query: {
         book(_, { id }) {
@@ -68,8 +69,8 @@ export const resolvers = {
             { expiresIn: '7d'});
             const accesstoken = sign({ userId: user.id }, 'SECRET', 
             { expiresIn: '15min'});
-            res.cookie('refresh-token', refreshtoken, { expiresIn: 60*60*24*7 })
-            res.cookie('access-token', refreshtoken, { expiresIn: 60*15 })
+            res.cookie('refresh-token', refreshtoken)
+            res.cookie('access-token', accesstoken)
             return user;
         }
     },

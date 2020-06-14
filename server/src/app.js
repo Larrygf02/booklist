@@ -3,7 +3,8 @@ import graphqlHTTP from 'express-graphql';
 import schema from './graphql/schema';
 import mongoose from 'mongoose';
 import cors from 'cors';
-
+import cookieParser from 'cookie-parser';
+import { verify } from 'jsonwebtoken';
 const app = express();
 //allow cross-origin requests
 app.use(cors())
@@ -15,6 +16,14 @@ mongoose.connect('mongodb://localhost/booklist', {
 
 mongoose.connection.once('open', () => {
     console.log('Connected to database');
+})
+
+app.use(cookieParser())
+app.use((req, res, next) => {
+    const accessToken = req.cookies['accessToken']
+    const data = verify(accessToken, 'SECRET')
+    req.userId = data.userId
+    next()
 })
 app.use('/graphql', graphqlHTTP({
     graphiql: true,
