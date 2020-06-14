@@ -56,6 +56,10 @@ export const resolvers = {
             const newUser = new user(input)
             await newUser.save()
             return newUser;
+        },
+        async loginUser( _ , { input }) {
+            const { username, password } = input
+            return user.findOne({ username, password })
         }
     },
     Book: {

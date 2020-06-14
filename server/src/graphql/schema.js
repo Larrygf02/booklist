@@ -32,6 +32,7 @@ const tyDefs = `
         createUser(input: UserInput): User
         deleteBook(id: ID!): Boolean
         deleteAuthor(id: ID!): Author
+        loginUser(input: UserInput): User
     }
     input AuthorInput {
         name: String!
@@ -45,6 +46,7 @@ const tyDefs = `
     input UserInput {
         username: String!
         password: String!
+        token: String
     }
 `
 export default makeExecutableSchema({
